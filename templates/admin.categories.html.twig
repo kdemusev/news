@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% include 'admin.base.html.twig' %}
+
+<div class="container">
+  <h1>Categories</h1>
+  <form id="catlist" method="post" action="categories/save">
+  {% for rec in categories %}
+    <div class="form-group row">
+      <div class="col-md-6">
+        <input type="text" class="form-control" name="ctname[{{ rec.id }}]" placeholder="Enter category name"
+               value="{{ rec.ctname }}" style="display:inline-block;" />
+      </div>
+      <div class="col-md-6">
+        <button type="button" class="btn btn-danger"
+                onclick="delCategory('{{ rec.id }}', this)">Delete</button>
+      </div>
+    </div>
+  {% endfor %}
+  <div class="form-group row">
+    <div class="col-md-6">
+      <input type="text" class="form-control" name="add_ctname[]" placeholder="Add category"
+             onkeyup="addField()"/>
+    </div>
+    <div class="col-md-6">
+      <button type="button" class="btn btn-danger" style="display: none;"
+              onclick="delNewCategory(this)">Delete</button>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+  <button type="button" class="btn btn-outline-primary" onclick="window.location = ''">Reject</button>
+  </form>
+</div>
+
+<script>
+  function addField() {
+    var obj = document.getElementById('catlist').children[document.getElementById('catlist').children.length-3];
+    var cln = obj.cloneNode(true);
+    cln.children[0].children[0].value='';
+
+    obj.children[0].children[0].onkeyup = null;
+    obj.children[1].children[0].style.display = 'inline-block';
+
+    obj.parentNode.insertBefore(cln, obj.nextSibling);
+  }
+
+  function delNewCategory(obj) {
+    obj.parentNode.parentNode.parentNode.removeChild(obj.parentNode.parentNode);
+  }
+
+  function delCategory(id, obj) {
+    var delNode = document.createElement('input');
+    delNode.type = 'hidden';
+    delNode.name = 'cttodel[]';
+    delNode.value = id;
+    document.getElementById('catlist').appendChild(delNode);
+
+    obj.parentNode.parentNode.parentNode.removeChild(obj.parentNode.parentNode);
+  }
+</script>
+
+{% endblock %}

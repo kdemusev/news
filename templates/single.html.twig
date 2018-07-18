@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ article.atname }}{% endblock %}
+{% block body %}
+{% include 'user.base.html.twig' %}
+
+  <div class="container">
+    <h1>
+        {{ article.atname }}
+    </h1>
+    <p>{{ article.atcontents }}</p>
+    <p><small>On {{ article.attime|date("d.m.Y") }} by {{ article.atauthor }}</small></p>
+    <a href="{{ app.url_generator.generate('index') }}" class="btn btn-link">back</a>
+  </div>
+{% endblock %}

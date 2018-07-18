@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% include 'admin.base.html.twig' %}
+<div class="container">
+  <h1>Edit article</h1>
+
+  <form method="post" action="save">
+    <input type="hidden" name="id" value="{{ data.id }}" />
+    <div class="form-group">
+      <label for="atname">Article name</label>
+      <input type="text" class="form-control" id="atname" name="atname" value="{{ data.atname }}">
+    </div>
+    <div class="form-group">
+      <label for="atcategories">Article categories</label>
+      <select multiple class="form-control" id="atcategories" name="atcategories[]">
+        {% for rec in categories %}
+        <option value="{{ rec.id }}" {% if rec.selected %}selected{% endif %}>{{ rec.ctname }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="atcontent">Article content</label>
+      <textarea class="form-control" id="atcontent" rows="5" name="atcontents">{{ data.atcontents }}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="atauthor">Author</label>
+      <input type="text" class="form-control" id="atauthor" name="atauthor" value="{{ data.atauthor}}" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-outline-primary" onclick="window.location = '../'">Reject</button>
+
+  </form>
+
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% include 'user.base.html.twig' %}
+
+  <div class="container">
+    <h1>
+        Categories
+    </h1>
+
+    <ul class="list-group">
+
+      {% for rec in categories %}
+        <li class="list-group-item">
+          <a class="nav-link active" href="{{ app.url_generator.generate('category', { id:rec.id }) }}">{{ rec.ctname }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+
+{% endblock %}

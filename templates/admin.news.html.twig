@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% include 'admin.base.html.twig' %}
+<div class="container">
+  <h1>News</h1>
+
+  {% for rec in news %}
+  <div class="form-group row">
+    <div class="col-md-6">
+      {{ rec.atname }}
+    </div>
+    <div class="col-md-6">
+      <a href="news/edit/{{ rec.id }}" class="btn btn-primary">Edit</a>
+      <a href="news/del/{{ rec.id }}" class="btn btn-danger">Delete</a>
+    </div>
+  </div>
+  {% endfor %}
+
+  <a href="news/add" class="btn btn-primary">Add new article</a>
+
+</div>
+{% endblock %}

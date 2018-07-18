@@ -1,0 +1,13 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" href="{{ app.url_generator.generate('index') }}">Homepage</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ app.url_generator.generate('categories') }}">Categories</a>
+  </li>
+  {% if app.session.get('uslogged') == 1 %}
+  <li class="nav-item">
+    <a class="nav-link" href="{{ app.url_generator.generate('admin') }}">Administration</a>
+  </li>
+  {% endif %}
+</ul>

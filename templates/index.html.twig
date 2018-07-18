@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% include 'user.base.html.twig' %}
+
+  <div class="container">
+    <h1>
+      {% if category is defined %}
+        {{ category.ctname }} news
+      {% else %}
+        News
+      {% endif %}
+    </h1>
+
+    <div class="list-group">
+
+      {% for article in articles %}
+        <a href="{{ app.url_generator.generate('single', { id:article.id }) }}" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ article.atname }}</h5>
+            <small>{{ article.attime|date("d.m.Y") }}</small>
+          </div>
+          <p class="mb-1">{{ article.atcontents|slice(0, 155) ~ '...' }}</p>
+          <small>{{ article.atauthor }}</small>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
